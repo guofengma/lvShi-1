@@ -10,18 +10,77 @@
 		<div class="form-box">
 			<div class="form-controller">
 				<img src="../common/img/user.png" class="form-icon">
-				<input type="text" placeholder="请输入账号" class="form-input" />
+				<input type="text" placeholder="请输入账号" v-model="proAccount" class="form-input" />
 			</div>
 			<div class="form-controller mb60">
 				<img src="../common/img/pwd.png" alt="" class="form-icon">
-				<input type="password" placeholder="请输入密码" class="form-input">
+				<input type="password" placeholder="请输入密码" v-model="proPwd" class="form-input">
 			</div>
 			<div class="btn-box">
-				<span class="form-btn" @click="test">登录</span>
+				<span class="form-btn" @click="login">登录</span>
 			</div>
 		</div>
 	</div>
 </template>
+
+<script>
+	import { Indicator } from 'mint-ui';
+	import url from '@/common/js/url.js'
+	import { Toast } from 'mint-ui';
+	export default{
+		props:{},
+		data(){
+			return{
+				proAccount:"",
+				proPwd:"",
+			}
+		},
+		created(){
+			// Toast('提示信息');
+		},
+		methods:{
+			test(){
+				alert(666)
+			},
+			//律师登录
+			login(){
+				// Indicator.open('加载中...');
+				let reqData={
+					openId:localStorage.getItem('openId'),
+					proAccount:this.proAccount,
+					proPwd:this.proPwd,
+				};
+				if(!reqData.proAccount || reqData.proAccount == '' || !reqData.proPwd || reqData.proPwd == ''){
+					console.log("账号或密码错误")
+					Toast({
+					  message: '账号或密码错误',
+					  duration: 2000
+					});
+					return
+				}
+				this.axios.get(url.lawyerLogin,{params:reqData}).then((response) => {
+					console.log("律师登录 -->",response)
+					if(response.data.code == 0){
+						localStorage.setItem('lawyerId',response.data.seqId)
+						localStorage.setItem('lawyerName',response.data.proName)
+						localStorage.setItem('lawyerImg',response.data.proImg)
+					}else{
+						Toast({
+						  message: response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch((response)=>{
+					console.log("登录失败 -->",response)
+					Toast({
+					  message: "登录失败",
+					  duration: 2000
+					});
+				})
+			},
+		}
+	}
+</script>
 <style>
 	/*头部*/
 	.top{
@@ -64,6 +123,7 @@
 	.form-icon{
 		width: 24px;
 		height: 32px;
+		margin-right: 20px;
 	}
 	.form-input{
 		flex: 1;
@@ -89,26 +149,3 @@
 		font-size: 16px;/*no*/
 	}
 </style>
-
-<script>
-	export default{
-		props:{},
-		data(){
-			return{
-				list:[
-					{"typeName":"民事","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"35"},
-					{"typeName":"离婚","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"36"},
-					{"typeName":"车祸","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"37"},
-					{"typeName":"医疗","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"38"},
-					{"typeName":"遗产","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"39"},
-					{"typeName":"事故","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"40"}
-				],
-			}
-		},
-		methods:{
-			test(){
-				alert(666)
-			}
-		}
-	}
-</script>

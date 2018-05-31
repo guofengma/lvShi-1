@@ -9,9 +9,16 @@ import 'lib-flexible/flexible'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+Vue.use(VueAxios,axios)
+
 import './common/css/reset.css'
 
-Vue.use(VueAxios,axios)
+
+// 引入全部组件
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css'
+Vue.use(Mint);
+
 
 Vue.config.productionTip = false
 

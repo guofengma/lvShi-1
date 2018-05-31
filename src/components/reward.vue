@@ -3,62 +3,144 @@
 		<!-- 背景头像 -->
 		<div class="top">
 			<img src="../common/img/bg.png" class="bg" />
-			<img src="../common/img/head.png" class="head">
-			<div class="name">寒子</div>
+			<img v-bind:src="head" class="head">
+			<div class="name">{{name}}</div>
 		</div>
 		<!-- 打赏金额 -->
 		<div class="reward-box">
-			<div class="reward-item">
-				<span class="je">5</span>
+
+			<div class="reward-item" v-for="item in dsList" @click="zanShang(item.num)">
+				<span class="je">{{item.num}}</span>
 				<span class="yuan">元</span>
 			</div>
-			<div class="reward-item">
-				<span class="je">10</span>
-				<span class="yuan">元</span>
-			</div>
-			<div class="reward-item">
-				<span class="je">20</span>
-				<span class="yuan">元</span>
-			</div>
-			<div class="reward-item">
-				<span class="je">50</span>
-				<span class="yuan">元</span>
-			</div>
-			<div class="reward-item">
-				<span class="je">100</span>
-				<span class="yuan">元</span>
-			</div>
-			<div class="reward-item">
-				<span class="je">200</span>
-				<span class="yuan">元</span>
-			</div>
+			
 		</div>
 		<!-- 其他金额 -->
-		<div class="other">其他金额</div>
+		<div class="other" @click="showModelfn">其他金额</div>
 
 		<!-- 其他金额弹框 -->
-		<div class="mask">
+		<div class="mask" v-if="showModel">
 			<div class="orther-box">
 				<div class="orther-tit-box">
 					<span class="orther-tit">其他金额</span>
-					<span class="close">×</span>
+					<span class="close" @click="closeModelFn">×</span>
 				</div>
 				<div class="orther-con">
 					<div class="je-input-box">
 						<span class="orther-input-label">其他金额(元)</span>
-						<input type="number" name="" class="je-input" placeholder="请输入金额">
+						<input type="number" name="" v-model="otherVal" class="je-input" placeholder="请输入金额">
 					</div>
-					<div class="btn zs-btn">赞赏</div>
+					<div class="btn zs-btn" @click="zanShangOther">赞赏</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- 赞赏是为表示鼓励而对文章内容的无偿赠与 -->
-		<div class="tips">赞赏是为表示鼓励而对文章内容的无偿赠与</div>
+		<div class="tips" v-if="target == 'info'">赞赏是为表示鼓励而对文章内容的无偿赠与</div>
+		<div class="tips" v-if="target == 'lawyer'">赞赏是为表示鼓励而对律师的无偿赠与</div>
 
 	</div>
 </template>
-<style>
+
+
+<script>
+	import qs from 'qs';
+	import url from '@/common/js/url.js'
+	import { Toast } from 'mint-ui';
+	export default{
+		props:{},
+		data(){
+			return{
+				otherVal:'',
+				head:require('../common/img/head.jpg'),
+				name:"",
+				target:"",	//info 打赏文章,   lawyer  打赏律师
+				seqId:"",	//打赏文章时传递 文章id，打赏律师时传递律师id
+				showModel:false,
+				dsList:[
+					{num:5,},{num:10,},{num:20,},{num:50,},{num:100,},{num:200,}
+				]
+			}
+		},
+		created(){
+			console.log("reward params -->",this.$route.params)
+			let target = this.$route.params.target
+			let seqId = this.$route.params.seqId
+			this.target = target
+			this.seqId = seqId
+			if(target == 'info'){
+				this.name = '知了法律咨询'
+			}else{
+				this.name = localStorage.getItem('lawyerName')
+				this.head = localStorage.getItem('lawyerImg')
+			}
+		},
+		methods:{
+			test(){
+				alert(666)
+			},
+			//显示其他金额弹框
+			showModelfn(){
+				this.showModel = true;
+			},
+			closeModelFn(){
+				this.showModel = false;
+			},
+			//赞赏 判断 文章赞赏还是律师赞赏
+			zanShang(num){
+				let target = this.target
+				if(target == 'info'){
+					this.artZanShang(num)
+				}else if(target == 'lawyer'){
+					this.lawyerZanShang(num)
+				}
+			},
+			//弹框中的赞赏
+			zanShangOther(){
+				let otherVal = this.otherVal;
+				let target = this.target
+				otherVal = parseFloat(otherVal)
+				if(typeof otherVal == 'number' && otherVal > 0){
+					if(target == 'info'){
+						this.artZanShang(otherVal)
+					}else if(target == 'lawyer'){
+						this.lawyerZanShang(otherVal)
+					}
+				}else{
+					Toast({
+					  message: "请输入正确的数值",
+					  duration: 2000
+					});
+				}
+			},
+			// 文章赞赏
+			artZanShang(num){
+				let redData = {
+					rewardMoney:num,
+					infoId:this.seqId,
+					openId:localStorage.getItem('openId'),
+				};
+				this.axios.post(url.artZanShang,{params:redData}).then((response) => {
+					console.log("文章赞赏 -->",response)
+				})
+			},
+			// 律师赞赏
+			lawyerZanShang(num){
+				let redData = {
+					orderMoney:num,
+					replyProId:this.seqId,
+					openId:localStorage.getItem('openId'),
+					busiType:2,
+				};
+				this.axios.post(url.lawyerZanShang,redData).then((response) => {
+					console.log("律师赞赏 -->",response)
+				})
+			},
+		}
+	}
+</script>
+
+<style scoped>
 	/*头部*/
 	.top{
 		height: 400px;
@@ -197,19 +279,3 @@
 		border-radius: 5px;
 	}
 </style>
-
-<script>
-	export default{
-		props:{},
-		data(){
-			return{
-				
-			}
-		},
-		methods:{
-			test(){
-				alert(666)
-			}
-		}
-	}
-</script>

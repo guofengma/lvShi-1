@@ -1,19 +1,19 @@
 <template>
-	<div class="infolist">
+	<div class="infolist" v-bind:class="{ovHide:showCate}">
 		
 		<!-- 头部 -->
 		<div class="list-head">
-			<input type="search" class="search" name="" placeholder="请输入关键词搜索">
-			<img src="../common/img/search.png" class="search-img">
-			<img src="../common/img/cate.png" class="cate-img">
+			<input type="search" class="search" name="" v-model="searchValue" placeholder="请输入关键词搜索">
+			<img src="../common/img/search.png" @click="getSearchInfoList" class="search-img">
+			<img src="../common/img/cate.png" @click="toggleShow" class="cate-img">
 		</div>
 
 		<!-- 分类 -->
-		<div class="cate-box">
+		<div class="cate-box" v-if="showCate" @click="toggleShow">
 			<div class="cate-con-box">
 				<div class="cate-tit">要闻分类查找</div>
 				<div class="cate-con">
-					<span class="cate-item" v-for="item in list">{{item.typeName}}</span>
+					<span class="cate-item" v-for="item in cateList" @click="getCateInfoList(item.seqId)">{{item.typeName}}</span>
 				</div>
 			</div>
 		</div>
@@ -21,372 +21,109 @@
 		<!-- 文章列表 -->
 		<div class="info-list">
 
-			<div class="info-item">
+			<div class="info-item" v-for="item in infoList" @click="toDetail(item.seqId)">
 				<div class="info-info-box">
 					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
+						{{item.infoTitle}}
 					</div>
 					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
+						<span class="time">{{item.createTime}}</span>
+						<span class="yd">阅读{{item.viewNum}}</span>
 						<span class="dz">
 							<img src="../common/img/zan.png" class="dz-icon">
-							100
+							{{item.likeNum}}
 						</span>
 					</div>
 				</div>
 				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
+					<!-- <img src="../common/img/wzimg.jpg" class="info-img"> -->
+					<img v-bind:src="item.infoImg" class="info-img">
 				</div>
 			</div>
 
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
-			<div class="info-item">
-				<div class="info-info-box">
-					<div class="info-item-tit">
-						离婚房子怎么分？法院公布十大典型案例
-					</div>
-					<div class="info-other-info">
-						<span class="time">2018年10月23日</span>
-						<span class="yd">阅读1500</span>
-						<span class="dz">
-							<img src="../common/img/zan.png" class="dz-icon">
-							100
-						</span>
-					</div>
-				</div>
-				<div class="img-box">
-					<img src="../common/img/wzimg.jpg" class="info-img">
-				</div>
-			</div>
+			<div class="noData" v-if="!infoList.length">暂无数据</div>
 
 		</div>
 
 	</div>
 </template>
+
+<script>
+	import url from '@/common/js/url.js'
+  	import { Toast } from 'mint-ui';
+	export default{
+		props:{},
+		data(){
+			return{
+				showCate:false,
+				searchValue:"",
+				cateList:[
+					{"typeName":"民事","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"35"},
+				],
+				infoList:[]
+			}
+		},
+		created(){
+			this.getCateList()
+			this.getInfoList()
+		},
+		methods:{
+			//切换显示 分类
+			toggleShow(){
+				this.showCate = !this.showCate
+				if(this.showCate){
+					document.getElementsByTagName("body")[0].className="ovHide";
+				}else{
+					document.getElementsByTagName("body")[0].className="";
+				}
+			},
+			//获取分类
+			getCateList:function(){
+				this.axios.get(url.getCateList).then((response) => {
+					console.log(response)
+					this.cateList = response.data.list;
+				})
+			},
+			//获取信息列表
+			getInfoList:function(obj){
+				let reqData = {
+					busiType:"ynlawyer",
+				};
+				if(obj && obj.typeId){
+					reqData.typeId = obj.typeId
+				}
+				if(obj && obj.keyword){
+					reqData.keyword = obj.keyword
+				}
+				this.axios.get(url.getInfoList,{params:reqData}).then((response) => {
+					console.log("信息列表 -->",response)
+					if(response.data.code == 0){
+						this.infoList = response.data.list;
+					}
+				})
+			},
+			toDetail(seqId){
+				console.log(seqId);
+				this.$router.push({path:'infoDetail/:seqId',name:"infoDetail",params:{seqId:seqId}})
+			},
+			// 点击分类
+			getCateInfoList:function(seqId){
+				console.log(seqId)
+				this.getInfoList({'typeId':seqId})
+				// this.toggleShow()
+			},
+
+			//点击搜索
+			getSearchInfoList(){
+				if(this.searchValue){
+					this.getInfoList({'keyword':this.searchValue})
+				}
+			},
+
+		}
+
+	}
+</script>
 <style>
 	.infolist{
 		position: relative;
@@ -508,21 +245,3 @@
 		justify-content: center;
 	}
 </style>
-<script>
-	export default{
-		props:{},
-		data(){
-			return{
-				list:[
-					{"typeName":"民事","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"35"},
-					{"typeName":"离婚","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"36"},
-					{"typeName":"车祸","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"37"},
-					{"typeName":"医疗","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"38"},
-					{"typeName":"遗产","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"39"},
-					{"typeName":"事故","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"40"}
-				],
-			}
-		},
-
-	}
-</script>
