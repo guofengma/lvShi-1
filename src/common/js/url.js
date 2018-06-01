@@ -38,12 +38,17 @@ export default{
 	tweetDetail:codeUrl+"/infopub/getById.do?oid="+oid+"&isPub=1",
 
 	// 2.3获取公众号openId
-  	wechatapiWxLogin: url + 'wechatapi/wxLogin.do?oid=' + oid + '&isPub=1',
+  	wechatapiWxLogin: codeUrl + 'wechatapi/wxLogin.do?oid=' + oid + '&isPub=1',
 
   	// 2.4更新会员微信信息
-  	getBySrvOpenId: url + 'member/getBySrvOpenId.do?oid=' + oid + '&isPub=1',
+  	getBySrvOpenId: codeUrl + 'member/getBySrvOpenId.do?oid=' + oid + '&isPub=1',
 
   	// 微信支付签名
-  	wechatapiJsSign: url + 'wechatapi/jsSign.do?oid=' + oid + '&isPub=1',
+  	wechatapiJsSign: codeUrl + 'wechatapi/jsSign.do?oid=' + oid + '&isPub=1',
 
+  	//删除推文
+	deleteTweet:codeUrl+"/infopub/delete.do?oid="+oid+"&isPub=1",
+
+	//推文点赞
+	zanTweet:codeUrl+"/infopub/saveLike.do?oid="+oid+"&isPub=1",
 }

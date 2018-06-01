@@ -45,6 +45,7 @@
 			//律师登录
 			login(){
 				// Indicator.open('加载中...');
+				this.$router.back(-1)
 				let reqData={
 					openId:localStorage.getItem('openId'),
 					proAccount:this.proAccount,
@@ -64,6 +65,7 @@
 						localStorage.setItem('lawyerId',response.data.seqId)
 						localStorage.setItem('lawyerName',response.data.proName)
 						localStorage.setItem('lawyerImg',response.data.proImg)
+						window.history.back(-1)
 					}else{
 						Toast({
 						  message: response.data.msg,

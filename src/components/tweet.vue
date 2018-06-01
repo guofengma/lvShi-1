@@ -3,47 +3,12 @@
 		<div class="article-box">
 			<div class="atr-tit">{{bean.infoTitle}}</div>
 			<div class="art-info">
-				<span class="time">{{bean.postDate}}</span>
+				<span class="time">{{bean.infoPostTime}}</span>
 				<span class="author">知了法律咨询</span>
 			</div>
 			<div class="art-con">
-				<div id="view_content" class="wenzhanag">
-                    <p style="">
-	<span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">近日，在5月20日全国助残日即将来临之际，北京市盈科（广州）律师事务所律师冯世锋、饶高明、石文婷律师作为专家志愿者以“残障人士权益保护”为主题，为广州图书馆读者开展残障人士权益保护法律公益咨询服务，对日常生活中残障人士及其家庭遇到的法律问题提出相应建议。</span> 
-</p>
-<p style="text-align:center;">
-	<img src="http://site.yingkelawyer.com/upload/image/20180517/20180517115949_5727.jpg" alt="" title="" data-bd-imgshare-binded="1"> 
-</p>
-<p style="text-align:center;">
-	<span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;"><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';">图为咨询</span><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';"></span><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';"><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">活</span><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;"></span><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">动现场</span></span></span>
-</p>
-<p style="">
-	<span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">本次活动由广州图书馆主办，由广州市绿叶读书会承办、广州市恭明社会组织发展中心、广州市越秀区捌零柒社会服务中心协办，北京市盈科（广州）律师事务所法律援助公益中心冯世锋、饶高明、石文婷律师担任专家志愿者进行咨询解答。</span> 
-</p>
-<p style="text-align:center;">
-	<img src="http://site.yingkelawyer.com/upload/image/20180517/20180517120023_8266.jpg" alt="" title="" data-bd-imgshare-binded="1"> 
-</p>
-<p style="text-align:center;">
-	<span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;"><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';">图为饶高明律师在解</span><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';"></span><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';">答咨询</span></span>
-</p>
-<p style="">
-	<span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">在咨询活动中，冯世锋、饶高明、石文婷律师就残障人士权益保护法律体系进行了介绍，并就《马拉喀什条约》及我国法律接轨、残障人士法律保护等问题进行了展望。随后，三位律师就对广州图书馆残障读者对其日常生活中遇到的法律问题进行了解答，获得残障读者的一致好评。</span> 
-</p>
-<p style="text-align:center;">
-	<img src="http://site.yingkelawyer.com/upload/image/20180517/20180517120048_0628.jpg" alt="" title="" data-bd-imgshare-binded="1"> 
-</p>
-<p style="text-align:center;">
-	<span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;"><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';"><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">图为冯世锋律师为</span><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;"></span><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">残障</span></span><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';"></span><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';">读者进行个案咨询</span></span>
-</p>
-<p style="text-align:center;">
-	<img src="http://site.yingkelawyer.com/upload/image/20180517/20180517120111_5744.jpg" alt="" title="" data-bd-imgshare-binded="1"> 
-</p>
-<p style="text-align:center;">
-	<span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;"><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';"><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">会后盈科律师与读者</span><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;"></span><span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">一起</span></span><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';"></span><span style="line-height:2;color:#333333;font-size:16px;font-family:'Microsoft YaHei';">参观广州图书馆创客空间</span></span>
-</p>
-<p style="">
-	<span style="font-family:'Microsoft YaHei';font-size:16px;color:#333333;line-height:2;">据了解，广州图书馆新馆于坐落于广州市的新城市中心、有“城市客厅”美誉的花城广场，占地面积2.1万平方米，总建筑面积9.8万平方米。是世界上规模最大的城市图书馆之一。全年接待公众访问795.3万人次，外借文献1142.8万册，累积注册读者143.3万人。与周边的广东省博物馆、广州大剧院、广州市第二少年宫形成文化共同体，成为广州的文化窗口。北京市盈科（广州）律师事务所文化法律部冯世锋律师担任广州图书馆的理事。文化法律事务部律师具有丰富的文化领域法律服务经验，担任广东省博物馆、广东省文化馆、广东省非遗保护中心、辛亥革命纪念馆、广东华侨博物馆等公共文化服务单位的常年法律顾问，该部的律师还担任广东省廖冰兄人文艺术基金会理事副秘书长、广州市艺术公益倡导中心理事等文化艺术机构的管理职务。</span>
-</p>
+				<div id="view_content" class="wenzhanag" v-html="bean.infoContentStr">
+                  
                 </div>
 			</div>
 		</div>
@@ -51,30 +16,24 @@
 		<div class="comment-box">
 			<div class="layer-tit">律师观点</div>
 			<div class="lawyer-info-box">
-				<img class="l-head" src="../common/img/head.png">
+				<img class="l-head" v-bind:src="bean.proImg">
 				<div class="l-info">
-					<div class="l-name">葛军律师</div>
-					<div class="l-desc">西安律师界新秀，执业于西安市山西方信律师事务所。擅长民商事、经济纠纷的诉讼及非诉讼代理。</div>
+					<div class="l-name">{{bean.proName}}律师</div>
+					<div class="l-desc">{{bean.proIntro}}</div>
 				</div>
 			</div>
 			<!-- 律师观点内容 -->
-			<div class="lsgd">
-				我们罗列《婚姻法》规定的法定判决离婚的情形：
-				1、重婚或有配偶者与他人同居；
-				2、实施家庭暴力或虐待、遗弃家庭成员的；
-				3、有赌博、吸毒等恶习屡教不改的；
-				4、因感情不和分居慢二年的；
-				5、其他导致夫妻感情破裂的情形。
-				前四种离婚条件是可以用客观标准来判断，而最后一条，法律上赋予法官主观衡量标准，因每个法官认知不同，判决结果也会有差异。从法律的规定看，婚外情是否会背叛离婚，还是得看有没有重婚或者有配偶与他人的同居行为，这两点又回到了取证难这个问题上。
+			<div class="lsgd" v-if="!edit">
+				{{bean.replyContentStr}}
 			</div>
 			<!-- 评论框 -->
-			<div class="cmt-con" style="display: none;">
-				<textarea class="comment-input" placeholder="请输入您的观点"></textarea>
-				<div class=" btnm cmt-btn">立即发布</div>
+			<div class="cmt-con" v-if="edit">
+				<textarea class="comment-input" placeholder="请输入您的观点" v-model="replyContentStr"></textarea>
+				<div class=" btnm cmt-btn" @click="updateTweet">立即发布</div>
 			</div>
-			<div class="edit-del-box">
-				<span class="item edit">编辑</span>
-				<span class="item del">删除</span>
+			<div class="edit-del-box" v-if="lawyerId == bean.proId">
+				<span class="item edit" @click="editFn">编辑</span>
+				<span class="item del" @click="deleteTweet">删除</span>
 			</div>
 		</div>
 
@@ -86,11 +45,11 @@
 
 		<!-- 点赏文章 -->
 		<div class="shang-box">
-			<div class="shang-item">
+			<div class="shang-item" @click="rewardInfo">
 				<img src="../common/img/shang.png" class="shang-img">
 				<span class="shang-name">点赏文章</span>
 			</div>
-			<div class="shang-item">
+			<div class="shang-item"  @click="rewardLawyer">
 				<img src="../common/img/shang.png" class="shang-img">
 				<span class="shang-name">点赏律师</span>
 			</div>
@@ -98,30 +57,201 @@
 		<!-- 二维码 -->
 		<div class="code-box">
 			<div class="code-item">
-				<img src="../common/img/code.png" class="code-img">
+				<img src="../common/img/gzh.jpg" class="code-img">
 				<span class="code-name">扫描关注“律师公众号” 您专业的律师顾问</span>
 			</div>、
 			<div class="code-item">
-				<img src="../common/img/code.png" class="code-img">
+				<img src="../common/img/xcx.jpg" class="code-img">
 				<span class="code-name">扫描关注“律师小程序” 您专业的律师顾问</span>
 			</div>
 		</div>
 
 		<!-- 阅 赞 评-->
 		<div class="handle-box">
-			<span class="yue">阅读 1500</span>
-			<span class="zan">
+			<span class="yue">阅读 {{bean.viewNum}}</span>
+			<span class="zan" @click="zan">
 				<img src="../common/img/zan.png" class="zan-icon">
-				100
+				{{bean.likeNum}}
 			</span>
-			<span class="ping">
+			<!-- <span class="ping">
 				<img src="../common/img/bz.png" class="bz-icon">
 				评论
-			</span>
+			</span> -->
 		</div>
 
 	</div>
 </template>
+<script>
+	import qs from 'qs'
+  	import { Toast } from 'mint-ui';
+	import url from '@/common/js/url.js'
+	export default{
+		props:{},
+		data(){
+			return{
+				edit:false,
+				seqId:"",	//推文id
+				bean:{
+					infoTitle:"离婚房子怎么分,离婚房子怎么分，离婚房子怎么分离婚房子怎么分离婚房子怎么分，离婚房子怎么分",
+					postDate:"2018-05-04",
+					viewNum:1500,
+					replyNum:3,
+					likeNum:3,
+					infoContentStr:"",
+					isComments:"",	//是否能评论
+					isLike:0,	//是否已点赞
+				},
+				replyContentStr:"",
+			}
+		},
+		created(){
+			console.log(this.$route.params)
+			let seqId = this.$route.params.seqId
+			this.seqId = seqId;
+			let openId = localStorage.getItem('openId')
+			let lawyerId = localStorage.getItem('lawyerId')
+			this.openId = openId;
+			this.lawyerId = lawyerId;
+			this.getTweetDetail();
+		},
+		methods:{
+			//获取推广文详情
+			getTweetDetail(){
+				let redData = {
+					id:this.seqId,
+					openId:localStorage.getItem('openId'),
+				};
+				this.axios.get(url.tweetDetail,{params:redData}).then((response) => {
+					console.log("获取推广文详情 -->",response)
+					if(response.data.code == 0){
+						this.bean = response.data.bean;
+						this.replyContentStr = response.data.bean.replyContentStr
+					}else{
+						Toast({
+						  message:  response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
+				})
+			},
+			//点击编辑按钮 
+			editFn(){
+				this.edit = !this.edit
+			},
+			//发布新的评论 更新推文
+			updateTweet(){
+				let replyContentStr = this.replyContentStr
+				if(replyContentStr.trim() == '' && replyContentStr == undefined){
+					Toast({
+					  message: "内容不能为空",
+					  duration: 2000
+					});
+					return
+				}
+				let redData = {
+					infoId:this.bean.infoId,
+					openId:localStorage.getItem('openId'),
+					proId:localStorage.getItem('lawyerId'),
+					replyContentStr:replyContentStr,
+				};
+				this.axios.post(url.saveReply,qs.stringify(redData)).then((response) => {
+					console.log("保存评论 -->",response)
+					if(response.data.code == 0){
+						Toast({
+						  message: "评论成功",
+						  duration: 2000
+						});
+						this.edit = false
+						setTimeout(()=>{
+							this.getTweetDetail()
+						},2000)
+					}else{
+						Toast({
+						  message:response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Toast({
+					  message:"评论失败",
+					  duration: 2000
+					});
+				})
+			},
+			//删除推文
+			deleteTweet(){
+				let redData = {
+					id:this.bean.seqId,
+				};
+				this.axios.get(url.deleteTweet,{params:redData}).then((response) => {
+					console.log("删除推文 -->",response)
+					if(response.data.code == 0){
+						Toast({
+						  message: "删除成功",
+						  duration: 2000
+						});
+						setTimeout(()=>{
+							this.$router.push('/')
+						},2000)
+					}else{
+						Toast({
+						  message:response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Toast({
+					  message:"评论失败",
+					  duration: 2000
+					});
+				})
+			},
+			//推文点赞
+			zan(){
+				let redData = {
+					busiType:'lawyer',
+					pubId:this.bean.seqId,
+					openId:localStorage.getItem('openId'),
+				};
+				this.axios.get(url.zanTweet,{params:redData}).then((response) => {
+					console.log("推文点赞 -->",response)
+					let code = response.data.code;
+					if(code == 0){
+						console.log("点赞成功")
+						Toast({
+						  message: "点赞成功",
+						  duration: 2000
+						});
+						setTimeout(()=>{
+							this.getTweetDetail()
+						},2000)
+					}else{
+						console.log("点赞 fail-->",response.data.msg)
+						Toast({
+						  message: response.data.msg,
+						  duration: 2000
+						});
+					}
+				})
+			},
+			//点赏文章
+			rewardInfo(){
+				let seqId = this.bean.infoId
+				this.$router.push({path:'reward/:seqId/:target',name:"reward",params:{seqId:seqId,target:"info"}})
+			},
+			//点赏律师
+			rewardLawyer(){
+				let seqId = this.bean.proId
+				this.$router.push({path:'reward/:seqId/:target',name:"reward",params:{seqId:seqId,target:"lawyer"}})
+			},
+		},
+	}
+</script>
 <style>
 	/* 文章 */
 	.article-box{
@@ -362,31 +492,3 @@
 		color: #999;
 	}
 </style>
-<script>
-	export default{
-		props:{},
-		data(){
-			return{
-				bean:{
-					infoTitle:"离婚房子怎么分,离婚房子怎么分，离婚房子怎么分离婚房子怎么分离婚房子怎么分，离婚房子怎么分",
-					postDate:"2018-05-04",
-					viewNum:1500,
-					replyNum:3,
-					likeNum:3,
-					infoContentStr:"",
-					isComments:"",	//是否能评论
-					isLike:0,	//是否已点赞
-				},
-				replyList:[
-					{
-						seqId:"",
-						infoId:"",
-						replyContentStr:"",
-						replyDate:"",
-						replyTimeFmt:"",	
-					}
-				]
-			}
-		}
-	}
-</script>

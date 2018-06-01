@@ -120,22 +120,59 @@
 					infoId:this.seqId,
 					openId:localStorage.getItem('openId'),
 				};
-				this.axios.post(url.artZanShang,{params:redData}).then((response) => {
+				this.axios.post(url.artZanShang,qs.stringify(redData)).then((response) => {
 					console.log("文章赞赏 -->",response)
 				})
 			},
-			// 律师赞赏
+
+			//律师赞赏
 			lawyerZanShang(num){
+				
+			},
+
+			// 律师赞赏
+			_lawyerZanShang(num){
 				let redData = {
 					orderMoney:num,
 					replyProId:this.seqId,
 					openId:localStorage.getItem('openId'),
 					busiType:2,
 				};
-				this.axios.post(url.lawyerZanShang,redData).then((response) => {
+				this.axios.post(url.lawyerZanShang,qs.stringify(redData)).then((response) => {
 					console.log("律师赞赏 -->",response)
 				})
 			},
+			// 请求支付签名
+			wechatapiJsSign () {
+		      let urls = location.href.split('#')[0]
+		      // let splist = location.href.split('#')[0]
+		      // let urls = splist + '?openId=' + url.openId.count
+		      // alert(urls)
+		      this.axios.post(url.wechatapiJsSign, qs.stringify({
+		        url: urls
+		      }))
+		        .then(response => {
+		          console.log(response.data)
+		          if (parseInt(response.data.code) === 0) {
+		            // this._memberrechargeSave(response.data)
+		          } else {
+		            Toast({
+					  message: response.data.msg,
+					  duration: 2000
+					});
+		          }
+		        })
+		        .catch(error => {
+		          console.log(error)
+		          //    alert('网络错误，不能访问');
+		          // this.$Spin.hide()
+		          // this.$Message.error('网络错误，不能访问')
+		          Toast({
+					  message: '网络错误，不能访问',
+					  duration: 2000
+				  });
+		        })
+		    },
 		}
 	}
 </script>

@@ -10,7 +10,7 @@
 						{{item.infoTitle}}
 					</div>
 					<div class="info-other-info">
-						<span class="time">{{item.createTime}}</span>
+						<span class="time">{{item.infoPostTime}}</span>
 						<span class="yd">阅读{{item.viewNum}}</span>
 						<span class="dz">
 							<img src="../common/img/zan.png" class="dz-icon">
@@ -20,12 +20,12 @@
 				</div>
 				<div class="img-box">
 					<!-- <img src="../common/img/wzimg.jpg" class="info-img"> -->
-					<img v-bind:src="item.infoImg" class="info-img">
+					<img v-bind:src="item.imgPath" class="info-img">
 				</div>
 			</div>
 		
-
 		</div>
+		<div class="noData" v-if="infoList.length ==0">暂无数据</div>
 
 	</div>
 </template>
@@ -47,8 +47,9 @@
 			getInfoList:function(e){
 				let redData = {
 					proId:localStorage.getItem('lawyerId'),
+					busiType:"lawyer"
 				};
-				this.axios.get(url.getInfoList,{params:redData}).then((response) => {
+				this.axios.get(url.tweetList,{params:redData}).then((response) => {
 					console.log("我的推文 -->",response)
 					this.infoList = response.data.list;
 				})

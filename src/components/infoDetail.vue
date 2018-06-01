@@ -15,8 +15,8 @@
 		<!-- 评价 -->
 		<div class="comment-box" v-if="showComt">
 			<div class="layer-tit">律师观点</div>
-			<textarea class="comment-input" placeholder="请输入您的观点"></textarea>
-			<div class=" btnm cmt-btn">立即发布</div>
+			<textarea class="comment-input" placeholder="请输入您的观点" v-model="replyContentStr"></textarea>
+			<div class="btnm cmt-btn" @click="saveComment">立即发布</div>
 		</div>
 
 		<!-- 点赏文章 -->
@@ -27,11 +27,11 @@
 		<!-- 二维码 -->
 		<div class="code-box">
 			<div class="code-item">
-				<img src="../common/img/code.png" class="code-img">
+				<img src="../common/img/gzh.jpg" class="code-img">
 				<span class="code-name">扫描关注“律师公众号” 您专业的律师顾问</span>
 			</div>、
 			<div class="code-item">
-				<img src="../common/img/code.png" class="code-img">
+				<img src="../common/img/xcx.jpg" class="code-img">
 				<span class="code-name">扫描关注“律师小程序” 您专业的律师顾问</span>
 			</div>
 		</div>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+	import qs from 'qs'
 	import url from '@/common/js/url.js'
   	import { Toast } from 'mint-ui';
 	export default{
@@ -71,7 +72,8 @@
 					isComments:"",	//是否能评论
 					isLike:0,	//是否已点赞
 				},
-				showComt:false
+				showComt:false,
+				replyContentStr:"",
 			}
 		},
 		created(){
@@ -129,7 +131,7 @@
 					}
 				})
 			},
-			// 评论
+			// 点击 评论 显示评论框或跳转登录
 			comment(){
 				console.log(2)
 				let lawyerId = localStorage.getItem('lawyerId')
@@ -154,6 +156,46 @@
 				if(isComments == 1){
 					this.showComt = true
 				}
+			},
+			//保存评论
+			saveComment(){
+				let replyContentStr = this.replyContentStr
+				if(replyContentStr.trim() == '' && replyContentStr == undefined){
+					Toast({
+					  message: "内容不能为空",
+					  duration: 2000
+					});
+					return
+				}
+				let redData = {
+					infoId:this.seqId,
+					openId:localStorage.getItem('openId'),
+					proId:localStorage.getItem('lawyerId'),
+					replyContentStr:replyContentStr,
+				};
+				this.axios.post(url.saveReply,qs.stringify(redData)).then((response) => {
+					console.log("保存评论 -->",response)
+					if(response.data.code == 0){
+						Toast({
+						  message: "评论成功",
+						  duration: 2000
+						});
+						setTimeout(()=>{
+							this.$router.push({path:'tweet/:seqId',name:"tweet",params:{seqId:response.data.seqId}})
+						},2000)
+					}else{
+						Toast({
+						  message:response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Toast({
+					  message:"评论失败",
+					  duration: 2000
+					});
+				})
+
 			},
 		}
 	}

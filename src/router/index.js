@@ -7,6 +7,7 @@ import my from '@/components/my'
 import reward from '@/components/reward'
 import infoDetail from '@/components/infoDetail'
 import tweet from '@/components/tweet'
+import myInfoList from '@/components/myInfoList'
 
 Vue.use(Router)
 
@@ -28,14 +29,14 @@ export default new Router({
       component: reward
     },
      {
-      path: '/',
+      path: '/my',
       name: 'my',
       component: my
     },
     {
-      path: '/',
-      name: 'infoList',
-      component: infoList
+      path: '/myInfoList',
+      name: 'myInfoList',
+      component: myInfoList
     },
     {
       path: '/tweet/:seqId',
