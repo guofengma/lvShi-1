@@ -64,11 +64,11 @@
 				seqId:"",
 				openId:"",
 				infoDetail:{
-					infoTitle:"离婚房子怎么分,离婚房子怎么分，离婚房子怎么分离婚房子怎么分离婚房子怎么分，离婚房子怎么分",
-					postDate:"2018-05-04",
-					viewNum:1500,
-					replyNum:3,
-					likeNum:3,
+					infoTitle:"",
+					postDate:"",
+					viewNum:0,
+					replyNum:0,
+					likeNum:0,
 					infoContentStr:"",
 					isComments:"",	//是否能评论
 					isLike:0,	//是否已点赞
@@ -184,7 +184,6 @@
 			},
 			//保存评论
 			saveComment(){
-				Indicator.open();
 				let replyContentStr = this.replyContentStr
 				if(replyContentStr.trim() == '' && replyContentStr == undefined){
 					Toast({
@@ -199,6 +198,7 @@
 					proId:localStorage.getItem('lawyerId'),
 					replyContentStr:replyContentStr,
 				};
+				Indicator.open();
 				this.axios.post(url.saveReply,qs.stringify(redData)).then((response) => {
 					Indicator.close();
 					console.log("保存评论 -->",response)
