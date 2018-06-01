@@ -24,9 +24,9 @@
 </template>
 
 <script>
-	import { Indicator } from 'mint-ui';
 	import url from '@/common/js/url.js'
 	import { Toast } from 'mint-ui';
+	import { Indicator } from 'mint-ui';
 	export default{
 		props:{},
 		data(){
@@ -44,8 +44,7 @@
 			},
 			//律师登录
 			login(){
-				// Indicator.open('加载中...');
-				this.$router.back(-1)
+				// this.$router.back(-1)
 				let reqData={
 					openId:localStorage.getItem('openId'),
 					proAccount:this.proAccount,
@@ -59,7 +58,9 @@
 					});
 					return
 				}
+				Indicator.open('加载中...');
 				this.axios.get(url.lawyerLogin,{params:reqData}).then((response) => {
+					Indicator.close();
 					console.log("律师登录 -->",response)
 					if(response.data.code == 0){
 						localStorage.setItem('lawyerId',response.data.seqId)
@@ -73,6 +74,7 @@
 						});
 					}
 				}).catch((response)=>{
+					Indicator.close();
 					console.log("登录失败 -->",response)
 					Toast({
 					  message: "登录失败",

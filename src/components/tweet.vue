@@ -83,8 +83,9 @@
 </template>
 <script>
 	import qs from 'qs'
-  	import { Toast } from 'mint-ui';
 	import url from '@/common/js/url.js'
+  	import { Toast } from 'mint-ui';
+  	import { Indicator } from 'mint-ui';
 	export default{
 		props:{},
 		data(){
@@ -117,11 +118,13 @@
 		methods:{
 			//获取推广文详情
 			getTweetDetail(){
+				Indicator.open();
 				let redData = {
 					id:this.seqId,
 					openId:localStorage.getItem('openId'),
 				};
 				this.axios.get(url.tweetDetail,{params:redData}).then((response) => {
+					Indicator.close();
 					console.log("获取推广文详情 -->",response)
 					if(response.data.code == 0){
 						this.bean = response.data.bean;
@@ -133,6 +136,7 @@
 						});
 					}
 				}).catch(()=>{
+					Indicator.close();
 					Toast({
 					  message: "获取失败",
 					  duration: 2000
@@ -153,6 +157,7 @@
 					});
 					return
 				}
+				Indicator.open();
 				let redData = {
 					infoId:this.bean.infoId,
 					openId:localStorage.getItem('openId'),
@@ -160,6 +165,7 @@
 					replyContentStr:replyContentStr,
 				};
 				this.axios.post(url.saveReply,qs.stringify(redData)).then((response) => {
+					Indicator.close();
 					console.log("保存评论 -->",response)
 					if(response.data.code == 0){
 						Toast({
@@ -177,6 +183,7 @@
 						});
 					}
 				}).catch(()=>{
+					Indicator.close();
 					Toast({
 					  message:"评论失败",
 					  duration: 2000
@@ -185,10 +192,12 @@
 			},
 			//删除推文
 			deleteTweet(){
+				Indicator.open();
 				let redData = {
 					id:this.bean.seqId,
 				};
 				this.axios.get(url.deleteTweet,{params:redData}).then((response) => {
+					Indicator.close();
 					console.log("删除推文 -->",response)
 					if(response.data.code == 0){
 						Toast({
@@ -205,6 +214,7 @@
 						});
 					}
 				}).catch(()=>{
+					Indicator.close();
 					Toast({
 					  message:"评论失败",
 					  duration: 2000
@@ -213,12 +223,14 @@
 			},
 			//推文点赞
 			zan(){
+				Indicator.open();
 				let redData = {
 					busiType:'lawyer',
 					pubId:this.bean.seqId,
 					openId:localStorage.getItem('openId'),
 				};
 				this.axios.get(url.zanTweet,{params:redData}).then((response) => {
+					Indicator.close();
 					console.log("推文点赞 -->",response)
 					let code = response.data.code;
 					if(code == 0){
@@ -237,6 +249,12 @@
 						  duration: 2000
 						});
 					}
+				}).catch(()=>{
+					Indicator.close();
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
 				})
 			},
 			//点赏文章

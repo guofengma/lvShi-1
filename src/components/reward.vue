@@ -46,7 +46,8 @@
 <script>
 	import qs from 'qs';
 	import url from '@/common/js/url.js'
-	import { Toast } from 'mint-ui';
+  	import { Toast } from 'mint-ui';
+  	import { Indicator } from 'mint-ui';
 	export default{
 		props:{},
 		data(){
@@ -113,25 +114,47 @@
 					});
 				}
 			},
-			// 文章赞赏
+
+			//文章赞赏
 			artZanShang(num){
+				this.wechatapiJsSign(this._artZanShang(datas,num))
+			},
+
+			// 文章赞赏
+			_artZanShang(num){
+				Indicator.open();
 				let redData = {
 					rewardMoney:num,
 					infoId:this.seqId,
 					openId:localStorage.getItem('openId'),
 				};
 				this.axios.post(url.artZanShang,qs.stringify(redData)).then((response) => {
+					Indicator.close();
 					console.log("文章赞赏 -->",response)
+					if(response.data.code == 0){
+						this.wxParamMap(datas,response.data.paramMap)
+					}else{
+						Toast({
+						  message: response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Indicator.close();
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
 				})
 			},
 
 			//律师赞赏
 			lawyerZanShang(num){
-				
+				this.wechatapiJsSign(this._lawyerZanShang(datas,num))
 			},
 
 			// 律师赞赏
-			_lawyerZanShang(num){
+			_lawyerZanShang(datas,num){
 				let redData = {
 					orderMoney:num,
 					replyProId:this.seqId,
@@ -139,11 +162,27 @@
 					busiType:2,
 				};
 				this.axios.post(url.lawyerZanShang,qs.stringify(redData)).then((response) => {
+					Indicator.close();
 					console.log("律师赞赏 -->",response)
+					if(response.data.code == 0){
+						this.wxParamMap(datas,response.data.paramMap)
+					}else{
+						Toast({
+						  message: response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Indicator.close();
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
 				})
 			},
 			// 请求支付签名
-			wechatapiJsSign () {
+			wechatapiJsSign (cb) {
+		      Indicator.open();
 		      let urls = location.href.split('#')[0]
 		      // let splist = location.href.split('#')[0]
 		      // let urls = splist + '?openId=' + url.openId.count
@@ -152,9 +191,10 @@
 		        url: urls
 		      }))
 		        .then(response => {
+		          Indicator.close();
 		          console.log(response.data)
 		          if (parseInt(response.data.code) === 0) {
-		            // this._memberrechargeSave(response.data)
+		            cb(response.data)
 		          } else {
 		            Toast({
 					  message: response.data.msg,
@@ -163,6 +203,7 @@
 		          }
 		        })
 		        .catch(error => {
+		          Indicator.close();
 		          console.log(error)
 		          //    alert('网络错误，不能访问');
 		          // this.$Spin.hide()
@@ -173,6 +214,45 @@
 				  });
 		        })
 		    },
+
+		    wxParamMap (data, datas) {	//data  签名参数  datas 后台返回的支付参数
+				let that = this
+				wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				// debug : true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				appId: data.appId, // 必填，公众号的唯一标识
+				timestamp: data.timestamp, // 必填，生成签名的时间戳
+				nonceStr: data.nonceStr, // 必填，生成签名的随机串
+				signature: data.signature, // 必填，签名，见附录1
+				jsApiList: ['chooseWXPay', 'checkJsApi', 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				})
+				wx.ready(function () {
+					wx.chooseWXPay({
+						timestamp: datas.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+						nonceStr: datas.nonceStr, // 支付签名随机串，不长于 32 位
+						package: datas.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+						signType: datas.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+						paySign: datas.paySign, // 支付签名
+						success: function (res) {
+							// 支付成功后的回调函数
+							window.history.back(-1)
+							// this.$Message.success('充值成功')
+							Toast({
+							  message: '充值成功',
+							  duration: 2000
+						  	});
+						},
+						fail: function (errors) {
+							// that.$Message.error(errors)
+							Toast({
+							  message: errors,
+							  duration: 2000
+						  	});
+						}
+					})
+				})
+				// this.$Spin.hide()
+			},
 		}
 	}
 </script>

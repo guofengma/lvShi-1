@@ -51,6 +51,7 @@
 <script>
 	import url from '@/common/js/url.js'
   	import { Toast } from 'mint-ui';
+  	import { Indicator } from 'mint-ui';
 	export default{
 		props:{},
 		data(){
@@ -58,7 +59,7 @@
 				showCate:false,
 				searchValue:"",
 				cateList:[
-					{"typeName":"民事","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"35"},
+					// {"typeName":"民事","typeSort":"null","busiType":"ynlawyer","typeAuth":"null","seqId":"35"},
 				],
 				infoList:[]
 			}
@@ -79,13 +80,29 @@
 			},
 			//获取分类
 			getCateList:function(){
+				Indicator.open();
 				this.axios.get(url.getCateList).then((response) => {
+					Indicator.close();
 					console.log(response)
-					this.cateList = response.data.list;
+					if(response.data.code == 0){
+						this.cateList = response.data.list;
+					}else{
+						Toast({
+						  message: response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Indicator.close();
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
 				})
 			},
 			//获取信息列表
 			getInfoList:function(obj){
+				Indicator.open();
 				let reqData = {
 					busiType:"ynlawyer",
 				};
@@ -96,10 +113,17 @@
 					reqData.keyword = obj.keyword
 				}
 				this.axios.get(url.getInfoList,{params:reqData}).then((response) => {
+					Indicator.close();
 					console.log("信息列表 -->",response)
 					if(response.data.code == 0){
 						this.infoList = response.data.list;
 					}
+				}).catch(()=>{
+					Indicator.close();
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
 				})
 			},
 			toDetail(seqId){

@@ -56,6 +56,7 @@
 	import qs from 'qs'
 	import url from '@/common/js/url.js'
   	import { Toast } from 'mint-ui';
+  	import { Indicator } from 'mint-ui';
 	export default{
 		props:{},
 		data(){
@@ -87,6 +88,7 @@
 		methods:{
 			//获取文章详情
 			getInfoDetail(seqId){
+				Indicator.open();
 				let redData = {
 					busiType:"ynlawyer",
 					seqId:seqId,
@@ -97,8 +99,22 @@
 					redData.proId = lawyerId
 				}
 				this.axios.get(url.getInfoDetail,{params:redData}).then((response) => {
+					Indicator.close();
 					console.log("获取文章详情 -->",response)
-					this.infoDetail = response.data.infoDetail;
+					if(response.data.code == 0){
+						this.infoDetail = response.data.infoDetail;
+					}else{
+						Toast({
+						  message: response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
+					Indicator.close();
 				})
 			},
 			//点赏文章
@@ -108,12 +124,14 @@
 			},
 			//文章点赞
 			zan(){
+				Indicator.open();
 				let redData = {
 					busiType:"ynlawyer",
 					seqId:this.seqId,
 					openId:localStorage.getItem('openId'),
 				};
 				this.axios.get(url.actZan,{params:redData}).then((response) => {
+					Indicator.close();
 					console.log("文章点赞 -->",response)
 					let code = response.data.code;
 					if(code == 0){
@@ -129,6 +147,13 @@
 						  duration: 2000
 						});
 					}
+				}).catch(()=>{
+					Indicator.close();
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
+					
 				})
 			},
 			// 点击 评论 显示评论框或跳转登录
@@ -159,6 +184,7 @@
 			},
 			//保存评论
 			saveComment(){
+				Indicator.open();
 				let replyContentStr = this.replyContentStr
 				if(replyContentStr.trim() == '' && replyContentStr == undefined){
 					Toast({
@@ -174,6 +200,7 @@
 					replyContentStr:replyContentStr,
 				};
 				this.axios.post(url.saveReply,qs.stringify(redData)).then((response) => {
+					Indicator.close();
 					console.log("保存评论 -->",response)
 					if(response.data.code == 0){
 						Toast({
@@ -190,6 +217,7 @@
 						});
 					}
 				}).catch(()=>{
+					Indicator.close();
 					Toast({
 					  message:"评论失败",
 					  duration: 2000

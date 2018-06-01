@@ -32,6 +32,8 @@
 
 <script>
 	import url from '@/common/js/url.js'
+  	import { Toast } from 'mint-ui';
+  	import { Indicator } from 'mint-ui';
 	export default{
 		props:{},
 		data(){
@@ -45,13 +47,28 @@
 		methods:{
 			//我的推文
 			getInfoList:function(e){
+				Indicator.open();
 				let redData = {
 					proId:localStorage.getItem('lawyerId'),
 					busiType:"lawyer"
 				};
 				this.axios.get(url.tweetList,{params:redData}).then((response) => {
+					Indicator.close();
 					console.log("我的推文 -->",response)
-					this.infoList = response.data.list;
+					if(response.data.code == 0){
+						this.infoList = response.data.list;
+					}else{
+						Toast({
+						  message: response.data.msg,
+						  duration: 2000
+						});
+					}
+				}).catch(()=>{
+					Indicator.close();
+					Toast({
+					  message: "获取失败",
+					  duration: 2000
+					});
 				})
 			},
 			//跳转推文详情
